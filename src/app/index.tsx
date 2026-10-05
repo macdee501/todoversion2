@@ -13,37 +13,17 @@ export default function MainScreen() {
 
   const handleSignUp = async () => {
 
-    console.log("Button Clicked");
     
     const { error } = await signUp.password({ emailAddress, password })
     if (error) {
-      // Handle the error in your app.
-      // See https://clerk.com/docs/guides/development/custom-flows/error-handling
      console.log(error)
       return
     }
 
-    // const { error: sendError } = await signUp.verifications.sendEmailCode()
-    // if (sendError) {
-    //   // Handle the error in your app.
-    //   return
-    // }
-
-    // setIsVerifying(true)
+  
   }
 
-  // const handleVerify = async () => {
-  //   const { error } = await signUp.verifications.verifyEmailCode({ code })
-  //   if (error) {
-  //     // Handle the error in your app.
-  //     return
-  //   }
 
-  //   const { error: finalizeError } = await signUp.finalize()
-  //   if (finalizeError) {
-  //     // Handle the error in your app.
-  //   }
-  // }
 
   if (!isLoaded) {
     return null
@@ -57,20 +37,7 @@ export default function MainScreen() {
     )
   }
 
-  // if (isVerifying) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <TextInput
-  //         style={styles.input}
-  //         value={code}
-  //         placeholder="Enter your verification code"
-  //         onChangeText={setCode}
-  //         keyboardType="numeric"
-  //       />
-  //       <Button title="Verify" onPress={handleVerify} />
-  //     </View>
-  //   )
-  // }
+  
 
   return (
     <View style={styles.container}>
@@ -90,7 +57,6 @@ export default function MainScreen() {
         onChangeText={setPassword}
       />
       <Button title="Sign up" onPress={handleSignUp} />
-      {/* Required for sign-up flows on Expo web. Clerk skips the browser CAPTCHA on iOS and Android */}
       <View nativeID="clerk-captcha" />
     </View>
   )
