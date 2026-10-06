@@ -1,6 +1,6 @@
-import { Stack } from "expo-router";
-import { ClerkProvider } from '@clerk/expo'
-import { tokenCache } from '@clerk/expo/token-cache'
+import { ClerkProvider } from '@clerk/expo';
+import { tokenCache } from '@clerk/expo/token-cache';
+import { Slot } from "expo-router";
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
@@ -10,7 +10,8 @@ if (!publishableKey) {
 }
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-  <Stack/>
+      {/* Slot acts as a placeholder for screens and goes to nearest index.tsx */}
+      <Slot/>
     </ClerkProvider>
 );
 }
