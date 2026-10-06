@@ -1,10 +1,13 @@
-import { useAuth } from "@clerk/expo";
+import { useAuth, useUser } from "@clerk/expo";
 import { Redirect, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
-import {UserButton} from "@clerk/expo/native"
+import { Button, Modal, StyleSheet, Text, View } from "react-native";
+import {UserButton, UserProfileView} from "@clerk/expo/native"
+import { useState } from "react";
 
 export default function HomeLayout() {
   const { isLoaded, isSignedIn } = useAuth();
+    const{user} =useUser()
+      const [isAuthViewOpen, setIsAuthViewOpen] = useState(false)
 
   if (!isLoaded) {
     return null;
@@ -21,11 +24,15 @@ export default function HomeLayout() {
     screenOptions={{
       headerRight:()=>(
         <View style={styles.rightHeader}>
-          {/* <UserButton/> */}
-          <Text>
-
-          Gonna Place A User Button Here
-          </Text>
+          <Button title="Account"  onPress={()=> setIsAuthViewOpen(true)}/>
+          <Modal
+          animationType="slide"
+          visible={isAuthViewOpen}
+          presentationStyle="pageSheet"
+          onRequestClose={() => setIsAuthViewOpen(false)}
+          >
+            <UserProfileView/>
+          </Modal>
         </View>
       )
     }}
