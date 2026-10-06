@@ -16,7 +16,7 @@ export default function HomeLayout() {
   // Not logged in?
   // Kick them back to sign-in.
   if (!isSignedIn) {
-    return <Redirect href="/(auth)/sign-in" />;
+    return <Redirect href="/(auth)" />;
   }
 
   return (
