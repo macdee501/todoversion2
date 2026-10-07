@@ -5,9 +5,15 @@ import {UserButton, UserProfileView} from "@clerk/expo/native"
 import { useState } from "react";
 
 export default function HomeLayout() {
+
+  // hooks from Clerk to check whether clerk isloaded and a user is signed in
   const { isLoaded, isSignedIn } = useAuth();
-    const{user} =useUser()
-      const [isAuthViewOpen, setIsAuthViewOpen] = useState(false)
+
+  // useUser hook from Clerk to allow user details to extracted and used
+  const{user} =useUser()
+
+  // a state to handle the AuthView form clerk to open or close
+  const [isAuthViewOpen, setIsAuthViewOpen] = useState(false)
 
   if (!isLoaded) {
     return null;
@@ -22,8 +28,12 @@ export default function HomeLayout() {
   return (
     <Stack
     screenOptions={{
+
+      // Built in Header Component from  React Native that will place a button 
+      // on the right side
       headerRight:()=>(
         <View style={styles.rightHeader}>
+          {/* Button to toggle AuthView Component */}
           <Button title="Account"  onPress={()=> setIsAuthViewOpen(true)}/>
           <Modal
           animationType="slide"
