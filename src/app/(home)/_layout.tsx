@@ -1,8 +1,8 @@
 import { useAuth, useUser } from "@clerk/expo";
+import { UserProfileView } from "@clerk/expo/native";
 import { Redirect, Stack } from "expo-router";
-import { Button, Modal, StyleSheet, Text, View } from "react-native";
-import {UserButton, UserProfileView} from "@clerk/expo/native"
 import { useState } from "react";
+import { Button, Modal, StyleSheet, View } from "react-native";
 
 export default function HomeLayout() {
 
@@ -35,13 +35,20 @@ export default function HomeLayout() {
         <View style={styles.rightHeader}>
           {/* Button to toggle AuthView Component */}
           <Button title="Account"  onPress={()=> setIsAuthViewOpen(true)}/>
+            {/* change the presentation style allows to transparent allows to play around with the modal height  */}
           <Modal
           animationType="slide"
           visible={isAuthViewOpen}
-          presentationStyle="pageSheet"
+          transparent={true}
           onRequestClose={() => setIsAuthViewOpen(false)}
           >
+            {/*  */}
+            <View style={styles.modalOverlay}>
+              <View style={styles.modalContent}>
+
             <UserProfileView/>
+              </View>
+            </View>
           </Modal>
         </View>
       )
@@ -53,8 +60,19 @@ export default function HomeLayout() {
 }
 
 const styles = StyleSheet.create({
-  rightHeader:{
+  rightHeader: {},
 
-  }
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0,0,0,0.4)",
+  },
 
-})
+  modalContent: {
+    height: "80%",
+    backgroundColor: "white",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    overflow: "hidden",
+  },
+});
