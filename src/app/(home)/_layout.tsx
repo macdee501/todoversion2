@@ -1,6 +1,6 @@
 import { useAuth, useUser } from "@clerk/expo";
 import { UserProfileView } from "@clerk/expo/native";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, Stack, Tabs } from "expo-router";
 import { useState } from "react";
 import { Button, Modal, StyleSheet, View } from "react-native";
 
@@ -26,7 +26,9 @@ export default function HomeLayout() {
   }
 
   return (
-    <Stack
+    <>
+    {/* Replaced Stack with Tabs as Tabs allows navigation between screens at the bottom of the screen */}
+    <Tabs
     screenOptions={{
 
       // Built in Header Component from  React Native that will place a button 
@@ -54,8 +56,10 @@ export default function HomeLayout() {
       )
     }}
     >
-      <Stack.Screen name="index" options={{title:"Home"}}/>
-    </Stack>
+      <Tabs.Screen name="index" options={{title:"Home"}}/>
+      <Tabs.Screen name="completed" options={{title:"Completed Tasks"}}/>
+    </Tabs>
+    </>
   );
 }
 

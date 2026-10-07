@@ -12,7 +12,7 @@ export default function MainScreen() {
 
     
 
-    <Text>Welcome:{user?.id}</Text>
+    <Text>Welcome:{user?.fullName}</Text>
     <Text>
       Tasks Are Loading
     </Text>
