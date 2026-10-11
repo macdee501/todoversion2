@@ -11,7 +11,6 @@ export default function MainScreen() {
 
   // Gets information about the currently signed-in Clerk user
   const{user} = useUser()
-  console.log(user)
 
   // Stores Task Title
   const [title,setTitle] = useState('')
