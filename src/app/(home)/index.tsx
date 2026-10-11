@@ -1,10 +1,11 @@
 import { useUser } from "@clerk/expo";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ID, Query } from "react-native-appwrite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { tablesDB } from "../../../lib/appwrite";
-import { router } from "expo-router";
+import { Swipeable } from "react-native-gesture-handler";
 
 export default function MainScreen() {
 
@@ -36,6 +37,7 @@ export default function MainScreen() {
       tableId:process.env.EXPO_PUBLIC_APPWRITE_TASKS_TABLE_ID!,
       queries:[
       Query.equal("userId",[user.id]),
+      Query.equal("completed",[false]),
       Query.orderDesc("$createdAt")
     ]
     });
@@ -93,6 +95,44 @@ const addTask= async()=>{
   }
 }
 
+const completeTask = async (taskId:string)=>{
+  try{
+    await tablesDB.updateRow({
+      databaseId:process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
+      tableId:process.env.EXPO_PUBLIC_APPWRITE_TASKS_TABLE_ID!,
+      rowId:taskId,
+      data:{
+        completed:true
+      }
+
+
+    })
+    console.log("Task complete")
+
+    // Remove the completed task from the Home screen
+    setTasks((currentTasks)=> 
+      currentTasks.filter((task) => task.$id !== taskId)
+  );
+  
+  }
+  catch(error)
+  {
+    console.error("failed to complete")
+  }
+}
+
+const rightSwipeAction = (taskId:string)=>{
+
+  return(
+    <Pressable>
+      <Text>
+        Complete
+      </Text>
+    </Pressable>
+  )
+  
+}
+
    // Runs when this screen first loads
    useEffect(()=>{
         
@@ -144,6 +184,13 @@ const addTask= async()=>{
         data={tasks}
         keyExtractor={(item)=> item.$id}
         renderItem={({item})=>(
+          <Swipeable
+          renderRightActions={()=>rightSwipeAction(item.$id)}
+          rightThreshold={40}
+          overshootRight={false}
+          >
+            
+
           <Pressable 
           style={styles.task}
           onPress={()=>router.push({
@@ -158,6 +205,7 @@ const addTask= async()=>{
               {item.description || "Tap to add details"}
             </Text>
           </Pressable>
+          </Swipeable>
         )}
 
         ListEmptyComponent={
@@ -229,6 +277,7 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
     borderRadius: 10,
     marginBottom: 10,
+    backgroundColor: "#fff",
   },
 
 
@@ -241,5 +290,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 30,
   },
+  completeAction: {
+  backgroundColor: "#22C55E",
+  width: 110,
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: 10,
+  marginBottom: 10,
+},
+
+completeActionText: {
+  color: "#fff",
+  fontSize: 15,
+  fontWeight: "bold",
+},
 
 });
