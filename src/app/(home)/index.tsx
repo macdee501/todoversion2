@@ -122,9 +122,13 @@ const completeTask = async (taskId:string)=>{
 }
 
 const rightSwipeAction = (taskId:string)=>{
+  
 
   return(
-    <Pressable>
+    <Pressable
+    style={styles.completeAction}
+    onPress={()=>completeTask(taskId)}
+    >
       <Text>
         Complete
       </Text>
