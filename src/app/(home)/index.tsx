@@ -4,6 +4,7 @@ import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-na
 import { ID, Query } from "react-native-appwrite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { tablesDB } from "../../../lib/appwrite";
+import { router } from "expo-router";
 
 export default function MainScreen() {
 
@@ -143,11 +144,20 @@ const addTask= async()=>{
         data={tasks}
         keyExtractor={(item)=> item.$id}
         renderItem={({item})=>(
-          <View style={styles.task}>
+          <Pressable 
+          style={styles.task}
+          onPress={()=>router.push({
+            pathname:'/task/[id]',
+            params:{id:item.$id}
+          })}
+          >
             <Text style={styles.taskTitle}>
               {item.title}
             </Text>
-          </View>
+            <Text>
+              {item.description || "Tap to add details"}
+            </Text>
+          </Pressable>
         )}
 
         ListEmptyComponent={

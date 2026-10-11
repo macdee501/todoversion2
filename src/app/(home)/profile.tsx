@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AccountScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView  style={styles.container} edges={['top','bottom']}>
       <UserProfileView
         isDismissible={false}
         style={styles.profile}
