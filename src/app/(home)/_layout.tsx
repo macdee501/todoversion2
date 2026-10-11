@@ -30,7 +30,7 @@ export default function HomeLayout() {
     {/* Replaced Stack with Tabs as Tabs allows navigation between screens at the bottom of the screen */}
     <Tabs
     screenOptions={{
-      
+      headerShown:false,
 
       // Built in Header Component from  React Native that will place a button 
       // on the right side
@@ -68,6 +68,7 @@ export default function HomeLayout() {
     >
       <Tabs.Screen name="index" options={{title:"Home"}}/>
       <Tabs.Screen name="completed" options={{title:"Completed Tasks"}}/>
+      <Tabs.Screen name="profile" options={{title:"Account"}} />
     </Tabs>
     </>
   );
