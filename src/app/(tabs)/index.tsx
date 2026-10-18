@@ -6,7 +6,6 @@ import { ID, Query } from "react-native-appwrite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { tablesDB } from "../../../lib/appwrite";
 import { Swipeable } from "react-native-gesture-handler";
-import ScreenContainer from "@/components/ScreenContainer";
 
 export default function MainScreen() {
 
@@ -184,7 +183,7 @@ const rightSwipeAction = (taskId:string)=>{
       {loading ? (
         <Text>Tasks  Are Loading</Text>
       ):(
-        <ScreenContainer>
+       
 
           <FlatList
           data={tasks}
@@ -220,7 +219,7 @@ const rightSwipeAction = (taskId:string)=>{
             </Text>
           }
           />
-        </ScreenContainer>
+        
       )}
 
     

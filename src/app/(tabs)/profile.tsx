@@ -72,7 +72,6 @@ export default function AccountScreen() {
     "No email available";
 
   return (
-    <ScreenContainer>
 
     <SafeAreaView
       className="flex-1 bg-[#F3F3F3]"
@@ -197,6 +196,5 @@ export default function AccountScreen() {
         </Text>
       </ScrollView>
     </SafeAreaView>
-    </ScreenContainer>
   );
 }
