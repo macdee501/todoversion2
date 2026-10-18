@@ -10,19 +10,68 @@ export default function StartScreen() {
 
   return (
     <>
-    <SafeAreaView style={styles.container}>
-      <Text>Start Up Screen</Text>
-      {/* Going to place a image here, this screenis intended to be a landing screen/page */}
-      <View>
+    <SafeAreaView className='flex-1 bg-[#F3F3F3]'>
+      {/* App Logo Title */}
 
+      <View
+      className='items-center pt-12'
+      >
+        <Text
+        className='text-3xl font-extrabold tracking-tight text-[#333333]'
+        >
+          ToDo
+        </Text>
+      </View>
 
-        <TouchableOpacity onPress={()=>router.push("/(auth)/sign-in")}  style={styles.button}>
-            <Text style={styles.buttonText} >Sign In To Continue</Text>
+      {/* Main Content */}
+      <View
+      className='flex-1 items-center justify-center px-8'
+      >
+        {/* Illustration Placeholder */}
+        <View
+        className='mb-12 h-64 w-64 items-center justify-center rounded-full bg-[#E5E5E5]'
+        >
+          <Text className='text-7xl'>✓</Text>
+        </View>
+
+        {/* Welcome Text */}
+        <Text
+        className='mb-4 text-center text-4xl font-bold text-[#303030]'
+        >
+          Get things done.
+        </Text>
+
+        {/* Description */}
+        <Text
+        className='text-center text-base leading-7 text-[#777777]'
+        >
+          Organise your tasks, stay, focused and keep track of every achievement
+        </Text>
+      </View>
+
+      {/* Bottom Section */}
+      <View
+      className='px-7 pb-8'
+      >
+        <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={()=> router.push("/(auth)/sign-in")}
+        className='h-16 items-center justify-center rounded-2xl bg-[#424242]'
+        >
+          <Text
+          className='text-lg font-semibold text-white'
+          >
+            Get Started
+          </Text>
         </TouchableOpacity>
 
-       
-       
+        <Text
+        className='mt-5 text-center text-xs text-[#888888]'
+        >
+          Stay organised. Stay productive
+        </Text>
       </View>
+      
 
     </SafeAreaView>
     
@@ -30,17 +79,3 @@ export default function StartScreen() {
   )
 }
 
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    justifyContent: 'center',
-    alignItems:"center"
-  },
-  button:{
-    backgroundColor:"#000",
-    
-  },
-  buttonText:{
-    color:"#fff"
-  }
-})
