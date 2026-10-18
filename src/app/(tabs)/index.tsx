@@ -6,6 +6,7 @@ import { ID, Query } from "react-native-appwrite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { tablesDB } from "../../../lib/appwrite";
 import { Swipeable } from "react-native-gesture-handler";
+import ScreenContainer from "@/components/ScreenContainer";
 
 export default function MainScreen() {
 
@@ -183,40 +184,43 @@ const rightSwipeAction = (taskId:string)=>{
       {loading ? (
         <Text>Tasks  Are Loading</Text>
       ):(
-        <FlatList
-        data={tasks}
-        keyExtractor={(item)=> item.$id}
-        renderItem={({item})=>(
-          <Swipeable
-          renderRightActions={()=>rightSwipeAction(item.$id)}
-          rightThreshold={40}
-          overshootRight={false}
-          >
-            
+        <ScreenContainer>
 
-          <Pressable 
-          style={styles.task}
-          onPress={()=>router.push({
-            pathname:'/task/[id]',
-            params:{id:item.$id}
-          })}
-          >
-            <Text style={styles.taskTitle}>
-              {item.title}
+          <FlatList
+          data={tasks}
+          keyExtractor={(item)=> item.$id}
+          renderItem={({item})=>(
+            <Swipeable
+            renderRightActions={()=>rightSwipeAction(item.$id)}
+            rightThreshold={40}
+            overshootRight={false}
+            >
+              
+  
+            <Pressable 
+            style={styles.task}
+            onPress={()=>router.push({
+              pathname:'/task/[id]',
+              params:{id:item.$id}
+            })}
+            >
+              <Text style={styles.taskTitle}>
+                {item.title}
+              </Text>
+              <Text>
+                {item.description || "Tap to add details"}
+              </Text>
+            </Pressable>
+            </Swipeable>
+          )}
+  
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>
+              Currently dont have any tasks
             </Text>
-            <Text>
-              {item.description || "Tap to add details"}
-            </Text>
-          </Pressable>
-          </Swipeable>
-        )}
-
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>
-            Currently dont have any tasks
-          </Text>
-        }
-        />
+          }
+          />
+        </ScreenContainer>
       )}
 
     

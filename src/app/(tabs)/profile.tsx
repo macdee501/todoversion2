@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ScreenContainer } from "react-native-screens";
 
 export default function AccountScreen() {
   const { user } = useUser();
@@ -71,6 +72,8 @@ export default function AccountScreen() {
     "No email available";
 
   return (
+    <ScreenContainer>
+
     <SafeAreaView
       className="flex-1 bg-[#F3F3F3]"
       edges={["top"]}
@@ -194,5 +197,6 @@ export default function AccountScreen() {
         </Text>
       </ScrollView>
     </SafeAreaView>
+    </ScreenContainer>
   );
 }
