@@ -25,7 +25,7 @@ export function useAppSignIn()
                     setErrorMessage("Additional account setup is required");
                     return
                 }
-                router.replace("/(home)")
+                router.replace("/(tabs)")
             }
         
         })

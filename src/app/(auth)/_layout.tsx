@@ -12,7 +12,7 @@ export default function AuthLayout() {
   // Already logged in?
   // Don't allow access to sign-in/sign-up.
   if (isSignedIn) {
-    return <Redirect href="/(home)" />;
+    return <Redirect href="/(tabs)" />;
   }
 
   return (
